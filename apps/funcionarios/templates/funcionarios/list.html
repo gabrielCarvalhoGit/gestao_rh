@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Funcionarios{% endblock %}
+
+{% block main %}
+    <ul class="funcionario-list">
+        {% for funcionario in funcionarios %}
+            <li class="funcionario-item">
+                <a href="{% url 'funcionario-edit' funcionario.id %}">{{funcionario}}</a>
+                <a href="{% url 'funcionario-delete' funcionario.id %}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a id='add-link' href="{% url 'funcionario-create' %}">
+        <div class="col-2 add-div">
+            <i class="fas fa-plus"></i>Create funcionario
+        </div>
+    </a>
+{% endblock %}

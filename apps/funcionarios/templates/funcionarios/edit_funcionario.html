@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Edit Funcionario{% endblock %}
+
+{% block main %}
+    <h1>Edit '{{funcionario.nome}}'</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" class="btn btn-success" value="Edit funcionario">
+    </form>
+
+    <br>
+    <h2>Documentos</h2>
+    <ul class="documento-list">
+        {% for documento in funcionario.documento_set.all %}
+            <li class="documento-item">
+                <a href="{{ documento.arquivo.url }}">{{ documento.descricao }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'documento-create' funcionario.id %}" class="btn btn-success">Add Documento</a>
+{% endblock %}

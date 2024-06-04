@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Add Documento{% endblock %}
+
+{% block main %}
+    <h1>Add Documento for '{{ funcionario.nome }}'</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Add Documento</button>
+    </form>
+{% endblock %}

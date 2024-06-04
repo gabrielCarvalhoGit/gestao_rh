@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Gestão RH{% endblock %}
+
+{% block main %}
+   <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      Ola {{ usuario.funcionario.nome }}
+
+      <ul class="functions-list">
+        <li class="funcionarios"><a href="{% url 'funcionario-list' %}">Generenciar funcionarios</a></li>
+        <li class="departamentos"><a href="{% url 'departamento-list' %}">Gerenciar departamentos</a></li>
+        <li class="horas-extras"><a href="{% url 'hora-extra-list' %}">Gerenciar banco de horas</a></li>
+      </ul>
+
+    </div>
+    <div class="col-sm">
+      <form id="logout-form" action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link">Logout</button>
+      </form>
+
+      {% if usuario.funcionario.empresa %}
+          <a href="{% url 'edit-empresa' usuario.funcionario.empresa.id %}">Editar empresa</a>
+      {% else %}
+          <a href="{% url 'create-empresa' %}">Criar empresa</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

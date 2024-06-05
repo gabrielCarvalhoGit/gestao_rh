@@ -3,3 +3,4 @@ venv
 *.pyc
 gestao_rh.pem
 gestao_rh/__pycache__/
+.env

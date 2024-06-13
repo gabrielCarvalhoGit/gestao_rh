@@ -2,5 +2,6 @@
 .env
 venv
 *.pyc
+*.sqlite3
 gestao_rh.pem
 gestao_rh/__pycache__/

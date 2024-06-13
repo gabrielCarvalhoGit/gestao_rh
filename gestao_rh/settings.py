@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-@y0l565&0rs5xm%19sf8k^ow94hp+c&a5k&2)qa9+3pibc^v&4
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.17.27.14']
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -57,13 +57,17 @@ WSGI_APPLICATION = 'gestao_rh.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gestao_rh',
-        'USER': 'postgres',
-        'PASSWORD': 'carvalho23',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'gestao_rh',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'carvalho23',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
 }
 
 AUTH_PASSWORD_VALIDATORS = [

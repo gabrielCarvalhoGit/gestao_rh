@@ -18,5 +18,9 @@ class Funcionario(models.Model):
     departamento = models.ManyToManyField(Departamento)
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT, null=True, blank=True)
 
+    @property
+    def total_horas_extras(self):
+        return self.registrohoraextra_set.all().aggregate(models.Sum('horas'))['horas__sum']
+
     def __str__(self):
         return self.nome

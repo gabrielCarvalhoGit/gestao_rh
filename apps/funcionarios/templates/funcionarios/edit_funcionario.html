@@ -20,4 +20,16 @@
         {% endfor %}
     </ul>
     <a href="{% url 'documento-create' funcionario.id %}" class="btn btn-success">Add Documento</a>
+
+    <br>
+    <h2>Banco de horas</h2>
+    <ul class="registro-horas-list">
+        {% for registro_hora in funcionario.registrohoraextra_set.all %}
+            <li class="registro-hora-item">
+                <a href="{% url 'hora-extra-edit' registro_hora.id %}">{{ registro_hora.motivo }} | {{ registro_hora.horas }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Total de horas extras: {{ funcionario.total_horas_extras }}</h3>
 {% endblock %}

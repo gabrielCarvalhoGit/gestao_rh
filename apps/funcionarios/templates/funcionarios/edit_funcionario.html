@@ -26,7 +26,7 @@
     <ul class="registro-horas-list">
         {% for registro_hora in funcionario.registrohoraextra_set.all %}
             <li class="registro-hora-item">
-                <a href="{% url 'hora-extra-edit' registro_hora.id %}">{{ registro_hora.motivo }} | {{ registro_hora.horas }}</a>
+                <a href="{% url 'hora-extra-edit-funcionario' registro_hora.id %}">{{ registro_hora.motivo }} | {{ registro_hora.horas }}</a>
             </li>
         {% endfor %}
     </ul>

@@ -39,7 +39,25 @@ def hora_extra_edit(request, id):
             return render(request, 'registro_horas_extras/edit_hora_extra.html', {'form': form, 'registro': hora_extra})
     else:
         return render(request, 'registro_horas_extras/edit_hora_extra.html', {'form': form, 'registro': hora_extra})
-    
+
+@login_required(login_url='accounts/login')
+def hora_extra_edit_funcionario(request, id):
+    hora_extra = get_object_or_404(RegistroHoraExtra, pk=id)
+    form = HoraExtraEditForm(instance=hora_extra)
+
+    if request.method == 'POST':
+        form = HoraExtraEditForm(request.POST, instance=hora_extra)
+
+        if form.is_valid():
+            hora_extra.save()
+            
+            user_id = request.user.funcionario.id
+            return redirect('funcionario-edit', id=user_id)
+        else:
+            return render(request, 'registro_horas_extras/edit_hora_extra.html', {'form': form, 'registro': hora_extra})
+    else:
+        return render(request, 'registro_horas_extras/edit_hora_extra.html', {'form': form, 'registro': hora_extra})
+
 @login_required(login_url='accounts/login')
 def hora_extra_delete(request, id):
     hora_extra = get_object_or_404(RegistroHoraExtra, pk=id)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Edit Hora Extra{% endblock %}
 
 {% block main %}
@@ -8,5 +9,19 @@
         {{ form.as_p }}
 
         <input type="submit" class="btn btn-success" value="Edit hora extra">
+
+        {% if registro.hora_utilizada %}
+            <button id="btn_horas" type="button" class="btn btn-danger" onclick='utilizouHoraExtra({{ registro.id }})'>Marcar como não utilizada</button>
+        {% else %}
+            <button type="btn_horas" class="btn btn-info" onclick='utilizouHoraExtra({{ registro.id }})'>Marcar como utilizada</button>
+        {% endif %}
     </form>
+
+    <br>
+    <h3 id="horas_atualizadas">Total de horas extras: {{ registro.funcionario.total_horas_extras }}</h3>
+{% endblock %}
+
+{% block static %}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/functions_ajax.js' %}"></script>
 {% endblock %}

@@ -1,5 +1,7 @@
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import RegistroHoraExtra
@@ -57,6 +59,25 @@ def hora_extra_edit_funcionario(request, id):
             return render(request, 'registro_horas_extras/edit_hora_extra.html', {'form': form, 'registro': hora_extra})
     else:
         return render(request, 'registro_horas_extras/edit_hora_extra.html', {'form': form, 'registro': hora_extra})
+
+@login_required(login_url='accounts/login')
+def hora_extra_utilizada(request, id):
+    hora_extra = get_object_or_404(RegistroHoraExtra, pk=id)
+    funcionario = request.user.funcionario
+
+    if request.method == 'POST':
+        if hora_extra.hora_utilizada:
+            hora_extra.hora_utilizada = False
+            hora_extra.save()
+        else:
+            hora_extra.hora_utilizada = True
+            hora_extra.save()
+
+        response = json.dumps({
+            'mensagem': 'requisição executada',
+            'horas': float(funcionario.total_horas_extras),
+        })
+        return HttpResponse(response, content_type = 'application/json')
 
 @login_required(login_url='accounts/login')
 def hora_extra_delete(request, id):

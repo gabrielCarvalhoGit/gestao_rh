@@ -5,4 +5,4 @@ from .models import Funcionario
 class FuncionarioForm(forms.ModelForm):
     class Meta:
         model = Funcionario
-        fields = ['nome', 'departamento']
+        fields = ['nome', 'departamentos']

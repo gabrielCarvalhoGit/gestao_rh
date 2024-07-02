@@ -15,8 +15,9 @@ from apps.departamentos.models import Departamento
 class Funcionario(models.Model):
     nome = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.PROTECT) # models.PROTECT levantará uma excessão 'ProtectedError' caso tente excluir o usser, evitando perda de dados no banco
-    departamento = models.ManyToManyField(Departamento)
+    departamentos = models.ManyToManyField(Departamento)
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT, null=True, blank=True)
+    imagem = models.ImageField()
 
     @property
     def total_horas_extras(self):
